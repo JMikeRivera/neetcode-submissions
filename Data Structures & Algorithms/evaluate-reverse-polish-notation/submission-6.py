@@ -1,0 +1,29 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        nums = []
+        res = 0
+        operators = ["+", "-", "*", "/"]
+
+        for i in range(len(tokens)):
+            if tokens[i] not in operators:
+                nums.append(int(tokens[i]))
+            elif tokens[i] in operators:
+                if tokens[i] == "+":
+                    num1 = nums.pop()
+                    num2 = nums.pop()
+                    nums.append(num1 + num2)
+                elif tokens[i] == "-":
+                    num1 = nums.pop()
+                    num2 = nums.pop()
+                    nums.append(num2 - num1)
+                elif tokens[i] == "*":
+                    num1 = nums.pop()
+                    num2 = nums.pop()
+                    nums.append(num1 * num2)
+                elif tokens[i] == "/":
+                    num1 = nums.pop()
+                    num2 = nums.pop()
+                    nums.append(math.trunc(num2 / num1))
+        
+        print(nums)
+        return (nums[0])
